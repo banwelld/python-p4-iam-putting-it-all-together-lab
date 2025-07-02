@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
-import NavBar from "./NavBar";
-import Login from "../pages/Login";
-import RecipeList from "../pages/RecipeList";
-import NewRecipe from "../pages/NewRecipe";
+import React, { useEffect, useState } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import NavBar from './NavBar';
+import Login from '../pages/Login';
+import RecipeList from '../pages/RecipeList';
+import NewRecipe from '../pages/NewRecipe';
 
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     // auto-login
-    fetch("/check_session").then((r) => {
+    fetch('/check_session').then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
       }
@@ -24,10 +24,10 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <main>
         <Switch>
-          <Route path="/new">
+          <Route path='/new'>
             <NewRecipe user={user} />
           </Route>
-          <Route path="/">
+          <Route path='/'>
             <RecipeList />
           </Route>
         </Switch>

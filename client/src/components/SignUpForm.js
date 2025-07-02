@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Button, Error, Input, FormField, Label, Textarea } from "../styles";
+import React, { useState } from 'react';
+import { Button, Error, Input, FormField, Label, Textarea } from '../styles';
 
 function SignUpForm({ onLogin }) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [bio, setBio] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [bio, setBio] = useState('');
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -14,10 +14,10 @@ function SignUpForm({ onLogin }) {
     e.preventDefault();
     setErrors([]);
     setIsLoading(true);
-    fetch("/signup", {
-      method: "POST",
+    fetch('/signup', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         username,
@@ -31,7 +31,7 @@ function SignUpForm({ onLogin }) {
       if (r.ok) {
         r.json().then((user) => onLogin(user));
       } else {
-        r.json().then((err) => setErrors(err.errors));
+        r.json().then((err) => setErrors(err.errors || []));
       }
     });
   }
@@ -39,55 +39,55 @@ function SignUpForm({ onLogin }) {
   return (
     <form onSubmit={handleSubmit}>
       <FormField>
-        <Label htmlFor="username">Username</Label>
+        <Label htmlFor='username'>Username</Label>
         <Input
-          type="text"
-          id="username"
-          autoComplete="off"
+          type='text'
+          id='username'
+          autoComplete='off'
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
       </FormField>
       <FormField>
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor='password'>Password</Label>
         <Input
-          type="password"
-          id="password"
+          type='password'
+          id='password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password"
+          autoComplete='current-password'
         />
       </FormField>
       <FormField>
-        <Label htmlFor="password">Password Confirmation</Label>
+        <Label htmlFor='password'>Password Confirmation</Label>
         <Input
-          type="password"
-          id="password_confirmation"
+          type='password'
+          id='password_confirmation'
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
-          autoComplete="current-password"
+          autoComplete='current-password'
         />
       </FormField>
       <FormField>
-        <Label htmlFor="imageUrl">Profile Image</Label>
+        <Label htmlFor='imageUrl'>Profile Image</Label>
         <Input
-          type="text"
-          id="imageUrl"
+          type='text'
+          id='imageUrl'
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
         />
       </FormField>
       <FormField>
-        <Label htmlFor="bio">Bio</Label>
+        <Label htmlFor='bio'>Bio</Label>
         <Textarea
-          rows="3"
-          id="bio"
+          rows='3'
+          id='bio'
           value={bio}
           onChange={(e) => setBio(e.target.value)}
         />
       </FormField>
       <FormField>
-        <Button type="submit">{isLoading ? "Loading..." : "Sign Up"}</Button>
+        <Button type='submit'>{isLoading ? 'Loading...' : 'Sign Up'}</Button>
       </FormField>
       <FormField>
         {errors.map((err) => (
